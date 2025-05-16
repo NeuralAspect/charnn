@@ -6,6 +6,16 @@ This document provides a detailed explanation of the character-level Recurrent N
 
 The implementation is a character-level language model that uses a simple RNN architecture to predict the next character in a sequence. It's built using PyTorch and includes both training and sampling functionality.
 
+
+# Chat UI Interface
+To run the chat cd to the web directory and run:
+```
+python app.py
+```
+
+
+The app will run on http://localhost:5000
+
 ## Data Preparation
 
 ```python
