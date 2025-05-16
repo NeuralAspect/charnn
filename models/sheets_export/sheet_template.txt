@@ -1,0 +1,64 @@
+Google Sheets RNN Implementation Template
+
+Sheet Structure:
+1. "Weights" sheet: Import all weight matrices (Wxh, Whh, Why, bh, by)
+2. "Vocabulary" sheet: Import character mappings
+3. "Input" sheet: For user input and one-hot encoding
+4. "Hidden" sheet: For hidden state calculations
+5. "Output" sheet: For output probabilities and sampling
+
+Implementation Steps:
+
+1. One-Hot Encoding (Input sheet):
+   A1: Input character
+   B1: =VLOOKUP(A1, Vocabulary!A:B, 2, FALSE)  # Get index
+   C1:Z1: =IF(COLUMN()-2=B1,1,0)  # One-hot vector
+
+2. Hidden State (Hidden sheet):
+   A1: =MMULT(Weights!Wxh, Input!C1:Z1)  # Wxh * x
+   B1: =IF(ROW()=1, 0, MMULT(Weights!Whh, Hidden!D1))  # Whh * h (zero for first row)
+   C1: =A1 + B1 + Weights!bh             # Add bias
+   D1: =TANH(C1)                         # tanh activation
+
+3. Output Probabilities (Output sheet):
+   A1: =MMULT(Weights!Why, Hidden!D1)    # Why * h
+   B1: =A1 + Weights!by                  # Add bias
+   C1: =EXP(B1)/SUM(EXP(B1))            # Softmax
+
+4. Sampling (Output sheet):
+   D1: =RANDBETWEEN(1,100)/100          # Random number
+   E1: =MATCH(D1, C1, 1)                # Find corresponding character
+   F1: =VLOOKUP(E1, Vocabulary!B:A, 2, FALSE)  # Get character
+
+5. Next Step:
+   - Copy the generated character back to Input!A1
+   - Copy the hidden state (Hidden!D1) to the next row
+   - Repeat for desired sequence length
+
+Notes:
+- Use absolute references ($) for weight matrices
+- Use relative references for sequences
+- Consider using named ranges for better readability
+- The sheet will need to be recalculated for each step
+- You might want to use Google Apps Script to automate the sequence generation
+
+Example Formulas for a Single Step:
+
+Input Sheet:
+A1: "a"  # Input character
+B1: =VLOOKUP(A1, Vocabulary!A:B, 2, FALSE)
+C1:Z1: =IF(COLUMN()-2=B1,1,0)
+
+Hidden Sheet:
+A1: =MMULT(Weights!$A$1:$Z$100, Input!$C$1:$Z$1)
+B1: =MMULT(Weights!$A$101:$Z$200, Hidden!$A$1)
+C1: =A1 + B1 + Weights!$A$201
+D1: =TANH(C1)
+
+Output Sheet:
+A1: =MMULT(Weights!$A$202:$Z$301, Hidden!$D$1)
+B1: =A1 + Weights!$A$302
+C1: =EXP(B1)/SUM(EXP(B1))
+D1: =RANDBETWEEN(1,100)/100
+E1: =MATCH(D1, C1, 1)
+F1: =VLOOKUP(E1, Vocabulary!B:A, 2, FALSE) 

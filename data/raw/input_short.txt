@@ -1,0 +1,14 @@
+
+When I first started out in machine learning in 2017 I was hung up with terminology. 
+My company had a hunch that we could use AI somehow to make use of the large amounts of data that we were 
+collecting and provide our users with insights and recommend actions to take. The problem was that I hadn't 
+a clue what I was doing and I didn't know where to start. I somehow convinced myself that I needed to get a clear 
+understanding of what the differences were between AI and Machine Learning. Days would go by trawling the internet 
+trying to find the answer. Eventually, I stumbled upon the Andrew Ng's Machine Learning Coursera course and I started 
+to understand what Machine Learning was and how it could be applied. This led on to more formal training and years of 
+practical experience and now I'm a proficient data scientist. I'm not about to unlock the secrets of AGI, but I'm perfectly 
+capable of creating custom deep learning models from scratch, reading and writing research papers and making commercially 
+successful AI software. The point I want to make is this: Somewhere along the way I realised that the question I was 
+trying to answer at the outset mattered the least. I didn't need to know the difference between AI and Machine Learning. 
+I just needed to know how to use the tools available in order to solve the problem at hand. Having said all that, 
+let me give you my take on how to define these terms.
